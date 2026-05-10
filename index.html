@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!--The <title> tag is the name that shows up in the browser tab-->
+  <title>Sara Han's Webpage</title>
+
+  <!--This line connects our HTML page to a separate CSS file called style.css.
+      CSS controls how the page looks (colors, fonts, spacing).
+      Keeping CSS in its own file is a best practice—it keeps HTML clean.-->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <!--This is the title at the top of the page-->
+  <h1 class="page-title">Sara Han's Webpage</h1>
+
+  <!--Three photos in a horizontal row.
+      The middle one is NOT actually me—see the caption below.
+      Lesson for class: alt text should always be honest about what an image is.-->
+  <div class="photo-row">
+    <img class="row-photo"
+         alt="Sara in NYC with friends"
+         src="SaraNYC.jpeg" />
+    <img class="row-photo"
+         alt="Sara at Delta Sigma Pi Formal with friend"
+         src="SaraFormal.jpeg" />
+  </div>
+  <p class="caption">
+    <em>In NYC with friends and going to fun formals! </em>
+  </p>
+
+  <!--This is the About Me paragraph-->
+  <p class="about-me">
+    Hi! I'm Sara Han, and I'm currently a student at McCombs School of Business 
+    intending to major in Management Information Systems. On campus, I'm involved
+    in Asian Business Student Association and Delta Sigma Pi. I love giving back 
+    to my community, and fostering a welcoming environment for others. Outside of 
+    academics. I love to explore new restaurants around town, and taking long nature 
+    walks while having deep conversations with friends. Hook 'em!
+  </p>
+
+  <hr />
+
+  <!--Work experience as a bulleted list-->
+  <h3>My Work Experience</h3>
+  <ul>
+    <li><strong>Delta Sigma Pi</strong> &mdash; Director of Marketing (2026 &ndash; Present)</li>
+    <li><strong>Asian Business Student Association</strong> &mdash; Career Development Director (2025 &ndash; 2026)</li>
+  </ul>
+
+  <hr />
+
+  <!--My Favorite Things: a bulleted list of links-->
+  <h3>My Favorite Things</h3>
+  <ul>
+    <li><a href="https://beliapp.com/" target="_blank">Beli App</a> &mdash; app that lets you track and share your restaurant ratings with friends</li>
+    <li><a href="https://www.imdb.com/title/tt3846674/" target="_blank">To All The Boys I've Loved Before</a> &mdash; my favorite comfort movie of all time! cringey but a classic</li>
+    <li><a href="https://chatgpt.com/" target="_blank">ChatGPT</a> &mdash; my favorite ai platform, I use it religiously</li>
+  </ul>
+
+  <hr />
+
+  <!--YouTube videos: each one is an iframe.
+      Tip for students: to add your own, go to YouTube > Share > Embed,
+      and copy the FULL iframe tag.-->
+  <h3>Videos I Enjoy</h3>
+
+  <div class="video-grid">
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/PflRUUL4018?si=qaIZ7BN5LyIp2_wA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+  </div>
+
+  <hr />
+
+  <!--Contact section.
+      The mailto: link opens the user's email program.
+      LinkedIn opens in a new tab.-->
+  <h3>Contact Me</h3>
+  <p class="contact-line">
+    <a href="mailto:sarahan@utexas.edu">sarahan@utexas.edu</a>
+    &nbsp;|&nbsp;
+    <a href="https://www.linkedin.com/in/sara-han28/" target="_blank">My LinkedIn Profile</a>
+  </p>
+
+  <!--Footer with copyright-->
+  <footer class="page-footer">
+    Copyright &copy; 2026 Sara Han. All Rights Reserved.
+  </footer>
+
+</body>
+</html>
