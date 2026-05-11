@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My London Photo Diary – Sara Han</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #faf6f0;
+      --ink: #1c1c1c;
+      --rust: #b84c3a;
+      --gold: #c9a84c;
+      --muted: #7a6e63;
+    }
+
+    body {
+      background-color: var(--cream);
+      color: var(--ink);
+      font-family: "Trebuchet MS", Arial, sans-serif;
+      font-weight: 300;
+    }
+
+    /* ── NAV ── */
+    nav {
+      display: flex;
+      gap: 12px;
+      padding: 14px 28px;
+      background: #2E5A88;
+      border-bottom: 2px solid #FFFFFF;
+    }
+    .nav-link {
+      color: #FFFFFF;
+      text-decoration: none;
+      font-family: "Trebuchet MS", Arial, sans-serif;
+      font-size: 15px;
+      padding: 6px 14px;
+      border-radius: 20px;
+      transition: background 0.2s;
+      font-weight: bold;
+    }
+    .nav-link:hover, .nav-link.active {
+      background: rgba(255,255,255,0.2);
+      color: #fff;
+    }
+
+    /* ── HEADER ── */
+    header {
+      text-align: center;
+      padding: 60px 20px 20px;
+      position: relative;
+    }
+    header::before {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 3px;
+      background: var(--rust);
+      margin: 0 auto 24px;
+    }
+    .diary-title {
+      font-family: "Trebuchet MS", Arial, sans-serif;
+      font-size: clamp(2.4rem, 6vw, 4.2rem);
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      line-height: 1.1;
+    }
+    .diary-sub {
+      font-family: "Trebuchet MS", Arial, sans-serif;
+      font-style: italic;
+      color: var(--muted);
+      margin-top: 10px;
+      font-size: 1.1rem;
+    }
+    .stamp {
+      display: inline-block;
+      border: 2px solid var(--rust);
+      color: var(--rust);
+      font-size: 0.7rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      margin-top: 18px;
+      font-family: "Trebuchet MS", Arial, sans-serif;
+    }
+
+    /* ── COLLAGE GRID ── */
+    .collage {
+      max-width: 1100px;
+      margin: 50px auto 80px;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-auto-rows: 160px;
+      gap: 10px;
+    }
+
+    .photo-card {
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+    }
+    .photo-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.45s ease, filter 0.45s ease;
+      filter: saturate(0.9);
+    }
+    .photo-card:hover img {
+      transform: scale(1.06);
+      filter: saturate(1.1);
+    }
+    .photo-card .overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 55%);
+      opacity: 0;
+      transition: opacity 0.35s;
+      display: flex;
+      align-items: flex-end;
+      padding: 14px;
+    }
+    .photo-card:hover .overlay { opacity: 1; }
+    .overlay span {
+      font-family: "Trebuchet MS", Arial, sans-serif;
+      font-style: italic;
+      color: #fff;
+      font-size: 0.95rem;
+      line-height: 1.3;
+    }
+
+    /* Grid placement – mixing sizes for a magazine collage feel */
+    .p1 { grid-column: 1 / 6;  grid-row: 1 / 4; }   /* tall wide – Notting Hill */
+    .p2 { grid-column: 6 / 9;  grid-row: 1 / 3; }   /* medium */
+    .p3 { grid-column: 9 / 13; grid-row: 1 / 3; }   /* medium */
+    .p4 { grid-column: 6 / 10; grid-row: 3 / 5; }   /* wide short */
+    .p5 { grid-column: 10 / 13;grid-row: 3 / 5; }
+    .p6 { grid-column: 1 / 5;  grid-row: 4 / 7; }   /* tall */
+    .p7 { grid-column: 5 / 9;  grid-row: 5 / 7; }
+    .p8 { grid-column: 9 / 13; grid-row: 5 / 7; }
+    .p9 { grid-column: 1 / 4;  grid-row: 7 / 9; }
+    .p10{ grid-column: 4 / 13; grid-row: 7 / 9; }   /* full-width panorama feel */
+
+    /* ── CAPTION STRIP ── */
+    .caption-strip {
+      text-align: center;
+      padding: 0 20px 80px;
+      color: var(--muted);
+      font-size: 0.88rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .caption-strip::before {
+      content: '✦ ';
+      color: var(--gold);
+    }
+    .caption-strip::after {
+      content: ' ✦';
+      color: var(--gold);
+    }
+
+    /* ── LIGHTBOX ── */
+    #lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(10,8,6,0.92);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 16px;
+      padding: 20px;
+    }
+    #lightbox.open { display: flex; }
+    #lightbox img {
+      max-width: 90vw;
+      max-height: 82vh;
+      object-fit: contain;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    #lightbox-caption {
+      font-family: "Trebuchet MS", Arial, sans-serif;
+      font-style: italic;
+      color: rgba(255,255,255,0.7);
+      font-size: 1rem;
+    }
+    #lightbox-close {
+      position: fixed;
+      top: 20px; right: 28px;
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 2rem;
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      font-size: 0.78rem;
+      color: var(--muted);
+      border-top: 1px solid #e5ded4;
+      letter-spacing: 1px;
+    }
+
+    @media (max-width: 700px) {
+      .collage {
+        grid-template-columns: 1fr 1fr;
+        grid-auto-rows: 200px;
+      }
+      .p1,.p2,.p3,.p4,.p5,.p6,.p7,.p8,.p9,.p10 {
+        grid-column: span 1;
+        grid-row: span 1;
+      }
+      .p1, .p6, .p10 { grid-column: span 2; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-link">🏠 Home</a>
+    <a href="london.html" class="nav-link active">✈️ My London Photo Diary</a>
+  </nav>
+
+  <header>
+    <h1 class="diary-title">My London<br>Photo Diary</h1>
+    <p class="diary-sub">Study Abroad · Spring 2026</p>
+    <div class="stamp">London, England</div>
+  </header>
+
+  <div class="collage">
+
+    <div class="photo-card p1" onclick="openLightbox(this)">
+      <img src="SaraPic.jpeg" alt="Sara in Notting Hill" />
+      <div class="overlay"><span>Notting Hill vibes 🌸</span></div>
+    </div>
+
+    <div class="photo-card p2" onclick="openLightbox(this)">
+      <img src="NealsYard.jpeg" alt="Neal's Yard" />
+      <div class="overlay"><span>Neal's Yard, Covent Garden</span></div>
+    </div>
+
+    <div class="photo-card p3" onclick="openLightbox(this)">
+      <img src="LondonView2.jpeg" alt="Trafalgar Square" />
+      <div class="overlay"><span>Trafalgar Square</span></div>
+    </div>
+
+    <div class="photo-card p4" onclick="openLightbox(this)">
+      <img src="Food.jpeg" alt="London brunch spread" />
+      <div class="overlay"><span>London brunch 🍳</span></div>
+    </div>
+
+    <div class="photo-card p5" onclick="openLightbox(this)">
+      <img src="Souvenirs.jpeg" alt="London souvenirs" />
+      <div class="overlay"><span>Souvenir shopping</span></div>
+    </div>
+
+    <div class="photo-card p6" onclick="openLightbox(this)">
+      <img src="LondonView1.jpeg" alt="St Paul's Cathedral" />
+      <div class="overlay"><span>St Paul's Cathedral</span></div>
+    </div>
+
+    <div class="photo-card p7" onclick="openLightbox(this)">
+      <img src="MISClass.jpeg" alt="MIS class group photo" />
+      <div class="overlay"><span>MIS class crew 🎓</span></div>
+    </div>
+
+    <div class="photo-card p8" onclick="openLightbox(this)">
+      <img src="ChocolateStrawberries.jpeg" alt="Chocolate strawberries" />
+      <div class="overlay"><span>Chocolate-covered strawberries 🍓</span></div>
+    </div>
+
+    <div class="photo-card p9" onclick="openLightbox(this)">
+      <img src="VintageWatches.jpeg" alt="Vintage watches at market" />
+      <div class="overlay"><span>Vintage market finds ⌚</span></div>
+    </div>
+
+    <div class="photo-card p10" onclick="openLightbox(this)">
+      <img src="Groupic.jpeg" alt="Group photo by the Thames" />
+      <div class="overlay"><span>Squad by the Thames 🌉</span></div>
+    </div>
+
+  </div>
+
+  <p class="caption-strip">Click any photo to enlarge</p>
+
+  <!-- Lightbox -->
+  <div id="lightbox" onclick="closeLightbox(event)">
+    <button id="lightbox-close" onclick="closeLightbox()">&times;</button>
+    <img id="lightbox-img" src="" alt="" />
+    <p id="lightbox-caption"></p>
+  </div>
+
+  <footer>Copyright &copy; 2026 Sara Han &nbsp;·&nbsp; All Rights Reserved</footer>
+
+  <script>
+    function openLightbox(card) {
+      const img = card.querySelector('img');
+      const caption = card.querySelector('.overlay span');
+      document.getElementById('lightbox-img').src = img.src;
+      document.getElementById('lightbox-img').alt = img.alt;
+      document.getElementById('lightbox-caption').textContent = caption ? caption.textContent : '';
+      document.getElementById('lightbox').classList.add('open');
+    }
+    function closeLightbox(e) {
+      if (!e || e.target !== document.getElementById('lightbox-img')) {
+        document.getElementById('lightbox').classList.remove('open');
+      }
+    }
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeLightbox();
+    });
+  </script>
+
+</body>
+</html>
