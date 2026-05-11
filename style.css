@@ -1,20 +1,22 @@
 /* ============================================================
-   Clint Tuttle's Webpage - style.css
+   Gina Singh's Webpage - style.css
    ============================================================
-   Color palette (UT Austin inspired):
-   - Burnt orange: #BF5700  (primary background)
-   - Navy:        #14213D   (primary text)
-   - Khaki:       #E8DCC4   (cards / content panels)
-   - White:       #FFFFFF   (highlights and contrast)
+   CSS changes included:
+   1. Navy blue page background
+   2. Simple Trebuchet font
+   3. Updated title font color
+   4. Updated section/card background colors
+   5. Rounded corners on images, sections, videos, and boxes
+   6. Link hover effects
    ============================================================ */
 
 /* ---- Page basics ---- */
 body {
-  background-color: #2E5A88;          /* burnt orange background */
-  color: #14213D;                     /* navy text for contrast  */
-  font-family: Georgia, "Times New Roman", serif;
+  background-color: #2E5A88;
+  color: #14213D;
+  font-family: "Trebuchet MS", Arial, sans-serif;
   max-width: 900px;
-  margin: 0 auto;                     /* centers the whole page  */
+  margin: 0 auto;
   padding: 30px 20px;
   line-height: 1.6;
 }
@@ -22,52 +24,54 @@ body {
 /* ---- Page title ---- */
 .page-title {
   text-align: center;
-  color: #14213D;                     /* navy title */
-  background-color: #E8DCC4;          /* khaki bar behind title */
+  color: #14213D;
+  background-color: #FFFFFF;
   font-size: 42px;
   font-weight: bold;
-  padding: 20px;
-  border: 3px solid #FFFFFF;
-  border-radius: 8px;
+  padding: 22px;
+  border: 3px solid #BBD8F2;
+  border-radius: 18px;
   letter-spacing: 1px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
 }
 
 /* ---- Photo row at top: three images side-by-side ---- */
 .photo-row {
-  display: flex;                      /* puts items in a row */
-  justify-content: center;            /* centers them horizontally */
+  display: flex;
+  justify-content: center;
   align-items: stretch;
-  gap: 8px;                           /* small space between photos */
-  margin: 20px 0 10px 0;
+  gap: 14px;
+  margin: 22px 0 12px 0;
 }
 
 .row-photo {
-  width: 33%;                         /* each photo takes ~one-third */
-  height: 280px;                      /* all photos same height */
-  object-fit: cover;                  /* crop to fill, no distortion */
-  border: 4px solid #FFFFFF;          /* navy frame */
-  border-radius: 6px;
+  width: 33%;
+  height: 280px;
+  object-fit: cover;
+  border: 4px solid #FFFFFF;
+  border-radius: 18px;
   background-color: #FFFFFF;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* ---- Section headings (Fall 2026 Schedule, Videos, etc.) ---- */
+/* ---- Section headings ---- */
 h3 {
-  color: #FFFFFF;                     /* white headings on orange */
+  color: #FFFFFF;
   font-size: 26px;
-  border-bottom: 2px solid #14213D;
+  border-bottom: 3px solid #BBD8F2;
   padding-bottom: 6px;
   margin-top: 30px;
-
 }
 
 /* ---- About Me paragraph ---- */
 .about-me {
-  background-color: #E8DCC4;          /* khaki "card" */
+  background-color: #E8F4FF;
   color: #14213D;
   padding: 20px 25px;
-  border-radius: 8px;
-  border-left: 6px solid #FFFFFF;
+  border-radius: 18px;
+  border-left: 7px solid #BBD8F2;
   font-size: 17px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
 }
 
 /* ---- Resume line ---- */
@@ -75,10 +79,11 @@ h3 {
   text-align: center;
   background-color: #FFFFFF;
   color: #14213D;
-  padding: 12px;
-  border-radius: 6px;
+  padding: 14px;
+  border-radius: 16px;
   font-size: 18px;
   font-weight: bold;
+  border: 2px solid #BBD8F2;
 }
 
 /* ---- Captions under photos ---- */
@@ -88,15 +93,18 @@ h3 {
   font-size: 14px;
   margin-top: 0;
   padding: 0 20px;
+  font-style: italic;
 }
 
 /* ---- Lists ---- */
 ol, ul {
-  background-color: #E8DCC4;
+  background-color: #E8F4FF;
   color: #14213D;
-  padding: 18px 18px 18px 45px;       /* extra left padding for bullets */
-  border-radius: 8px;
+  padding: 18px 18px 18px 45px;
+  border-radius: 18px;
   font-size: 17px;
+  border: 2px solid #BBD8F2;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
 }
 
 li {
@@ -107,38 +115,42 @@ li {
 a {
   color: #14213D;
   font-weight: bold;
-  text-decoration: underline;
+  text-decoration: none;
+  border-bottom: 2px solid #2E5A88;
 }
 
 a:hover {
-  color: #BF5700;
-  background-color: #FFFFFF;
-  padding: 1px 3px;
-  border-radius: 3px;
+  color: #FFFFFF;
+  background-color: #14213D;
+  padding: 2px 5px;
+  border-radius: 8px;
+  border-bottom: none;
 }
 
 /* ---- Horizontal rules ---- */
 hr {
   border: none;
-  border-top: 2px dashed #14213D;
+  border-top: 2px dashed #BBD8F2;
   margin: 30px 0;
 }
 
-/* ---- Video grid: 2 videos per row ---- */
+/* ---- Video grid ---- */
 .video-grid {
   justify-items: center;
-  text-align:center;
-  background-color: #E8DCC4;
-  padding: 40px;
-  border-radius: 8px;
+  text-align: center;
+  background-color: #E8F4FF;
+  padding: 35px;
+  border-radius: 18px;
+  border: 2px solid #BBD8F2;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
 }
 
 .video-grid iframe {
   width: 75%;
   justify-items: center;
-  text-align:center;
-  border: 3px solid #14213D;
-  border-radius: 6px;
+  text-align: center;
+  border: 4px solid #14213D;
+  border-radius: 16px;
   background-color: #14213D;
 }
 
@@ -148,9 +160,10 @@ hr {
   background-color: #FFFFFF;
   color: #14213D;
   padding: 15px;
-  border-radius: 6px;
+  border-radius: 16px;
   font-size: 17px;
   font-weight: bold;
+  border: 2px solid #BBD8F2;
 }
 
 /* ---- Footer ---- */
@@ -160,7 +173,7 @@ hr {
   font-size: 13px;
   margin-top: 40px;
   padding: 15px;
-  border-top: 2px solid #14213D;
+  border-top: 2px solid #BBD8F2;
   letter-spacing: 0.5px;
 }
 
@@ -174,7 +187,6 @@ hr {
     font-size: 30px;
   }
 
-  /* Stack the photos vertically on small screens */
   .photo-row {
     flex-direction: column;
     align-items: center;
@@ -185,7 +197,6 @@ hr {
     height: 250px;
   }
 
-  /* Stack contact links on small screens */
   .contact-line {
     font-size: 15px;
   }
